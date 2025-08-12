@@ -1,5 +1,5 @@
 # 6Helicene Predictor · GA + Deep Learning
-[![Made with Python](https://img.shields.io/badge/Python-3.10%2B-informational)](https://www.python.org/) [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange)](https://www.tensorflow.org/) [![Notebooks](https://img.shields.io/badge/Jupyter-Notebooks-blue)](https://jupyter.org/) [![License](https://img.shields.io/badge/License-Choose--one-lightgrey)](#licencia)
+[![Made with Python](https://img.shields.io/badge/Python-3.10%2B-informational)](https://www.python.org/) [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange)](https://www.tensorflow.org/) [![Notebooks](https://img.shields.io/badge/Jupyter-Notebooks-blue)](https://jupyter.org/) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 Predicción de **fuerza rotatoria** ($R_{max}$, $R_{min}$) y **longitud de onda** ($\lambda$) para derivados **halogenados de [6]heliceno** (1–16 sustituyentes), combinando **modelos N-body** con **regresión cuantílica** para incertidumbre y un **algoritmo genético** (GA) que explora el espacio molecular de forma eficiente.
 
