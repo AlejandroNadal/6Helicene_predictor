@@ -1,0 +1,1 @@
+{"units": 256, "layers": 3, "dropout_rate": 0.3, "learning_rate": 0.005, "tuner/epochs": 2, "tuner/initial_epoch": 0, "tuner/bracket": 4, "tuner/round": 0}
