@@ -17,17 +17,28 @@ Predicción de **fuerza rotatoria** ($R_{max}$, $R_{min}$) y **longitud de onda*
 
 ---
 
-## 📊 Resultados (resumen)
-| Tarea   | MAE | RMSE | MAPE | R² |
-|:-------:|----:|-----:|-----:|---:|
-| Rmax    | 24.24 | 42.06 | 6.12% | 0.899 |
-| Rmin    | 23.44 | 31.46 | 8.55% | 0.934 |
-| λ       | 1.90 nm | 8.34 nm | 0.60% | 0.554 |
+## 📊 Resumen de resultados (según el informe del proyecto)
 
-> Hiperparámetros óptimos (Keras Tuner):  
-> **Rmax** → units=256, layers=1, dropout=0.0, lr=0.005  
-> **Rmin** → units=256, layers=3, dropout=0.3, lr=0.005  
-> **λ** → units=512, layers=1, dropout=0.0, lr=0.005
+**Rendimiento (validación cruzada, k=10, n ≤ 6):**
+
+| Propiedad | Conjunto | MAE | RMSE | MAPE | R² |
+|---|---|---:|---:|---:|---:|
+| **Rmax** | Train / Test | 31 ± 1 / 39 ± 5 | 52 ± 2 / 60 ± 12 | 8.1 ± 0.4% / 10 ± 2% | 0.85 ± 0.01 / 0.79 ± 0.07 |
+| **Rmin** | Train / Test | 51 ± 4 / 62 ± 6 | 70 ± 4 / 81 ± 6 | 18 ± 2% / 22 ± 3% | 0.67 ± 0.04 / 0.60 ± 0.10 |
+
+**Patrones estructurales (n ≤ 6):**
+- En **Rmax**, las posiciones **2, 3, 14 y 15** son las más favorables; **8–9** pueden ser útiles en dihalogenados, pero pierden relevancia al aumentar *n* por efectos estéricos y de saturación.
+- En **Rmin**, la contribución depende de *n*: con 1 halógeno dominan **3/14**; con 2 emergen **7–10**; con *n* mayores reaparecen posiciones intermedias (**3, 5, 12, 14**), mientras las periféricas suelen ser menos deseables.
+
+**Escalado a n > 6 con GA + incertidumbre:**
+- *Fitness* integrado con cuantílicas: **Rmax** = μ − λ·σ; **Rmin** = −μ + λ·σ.
+- **λ=0** prioriza la media (más agresivo); **λ=1** favorece **robustez** (intervalos más estrechos) y filtra candidatos inestables. En los Top‑K por *n*, λ=0 eleva ligeramente μ pero ensancha los intervalos; λ=1 reduce μ y estrecha σ, útil para priorizar síntesis.
+
+**Reconstrucción de ECD (caso Rmax):**
+- A partir de \(R_{0j}\) y \(\lambda_j\), se estima \(\Delta\varepsilon_j \approx 4.32\times10^{-3} R_{0j}/\lambda_j\) y se aplica **ensanchamiento gaussiano** con **FWHM=25 nm** para generar el espectro continuo (banda simétrica cuando domina una transición).
+
+> **TL;DR:** El modelo reproduce **Rmax** con alta fidelidad en n ≤ 6; **Rmin** es más exigente pero informativo para descartar configuraciones. El **GA** con control de **λ** permite explorar n > 6 equilibrando **rendimiento** y **confianza**, para proponer candidatos **sintetizables** y **robustos**.
+
 
 ---
 
@@ -128,7 +139,7 @@ donde `mu_real ± sigma_real` es la predicción desnormalizada de $R_{max}$.
 Si usas este repositorio en trabajos académicos, cita así (ejemplo):
 ```
 @misc{helicene_predictor,
-  title  = {Predicciones de propiedades moleculares mediante Redes Neuronales},
+  title  = {Predicción de Propiedades Moleculares mediante Redes Neuronales},
   author = {Alejandro Nadal López-Cepero},
   year   = {2025},
   url    = {https://github.com/<usuario>/6Helicene_predictor}
@@ -138,6 +149,7 @@ Si usas este repositorio en trabajos académicos, cita así (ejemplo):
 ---
 
 ## 🔐 Licencia
+
 
 ---
 
@@ -150,4 +162,3 @@ Sí. Amplía el espacio {H,F,Cl,Br,I} y ajusta el *one‑hot* y el mapeo de cód
 
 **¿Dónde están los datos brutos?**  
 Los CSV procesados están en `data/processed/`. Para datos grandes, usa *Releases* en GitHub.
-
