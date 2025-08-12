@@ -149,8 +149,7 @@ Si usas este repositorio en trabajos académicos, cita así (ejemplo):
 ---
 
 ## 🔐 Licencia
-
-
+Este proyecto está licenciado bajo la **MIT License**. Consulta el archivo [`LICENSE`](LICENSE) para ver el texto completo.
 ---
 
 ## 🙋 FAQ
